@@ -1,0 +1,3 @@
+class FighterStats
+
+end
