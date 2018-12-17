@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-
+require 'pry'
 require "bundler/setup"
 require "ufc_schedule"
 

@@ -1,3 +1,6 @@
+require 'pry'
+require 'nokogiri'
+
 class CommandLineInterface
 
   def run
@@ -6,7 +9,7 @@ class CommandLineInterface
   end
 
   def greeting
-
+    binding.pry
   end
 
   def list_schedule
