@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-require 'pry'
 require "bundler/setup"
 require "ufc_schedule"
 
@@ -7,8 +6,8 @@ require "ufc_schedule"
 # with your gem easier. You can also use a different console, if you like.
 
 # (If you use this, don't forget to add pry to your Gemfile!)
-# require "pry"
-# Pry.start
+require "pry"
+Pry.start
 
-require "irb"
-IRB.start(__FILE__)
+# require "irb"
+# IRB.start(__FILE__)
