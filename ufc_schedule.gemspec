@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{This is a gem that will allow you to view the Ultimate Fighting Championship (UFC) schedule as well as statistics related to the scheduled fights}
   spec.homepage      = "https://github.com/JoeQuattroneufc_schedule"
   spec.license       = "MIT"
-
+  
   spec.files         = Dir.chdir(File.expand_path('..', __FILE__)) do
     `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   end
