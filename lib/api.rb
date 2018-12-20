@@ -15,7 +15,6 @@ class Concerns::API
 
       doc = Nokogiri::HTML(open("http://ufc-data-api.ufc.com/api/v1/us/events/#{event.id}"))
 
-
       doc.css('.flipcard-front-pre').each do |card|
         red_name = card.css('.fighter-name-red').text.strip
 
@@ -37,10 +36,6 @@ class Concerns::API
         event.event_fights << new_fight
       end
     end
-  end
-
-  def scrape_fighters
-
   end
 
 end
