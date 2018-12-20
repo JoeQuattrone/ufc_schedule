@@ -1,6 +1,6 @@
 # UFC Schedule
 
-Welcome to the ufc_schedule gem! This gem is made for fans who want to view real time UFC data through their command line. This gem will allow you to view upcoming UFC events, the fighters on those events, and stats of each fighter.
+Welcome to the ufc_schedule gem! This gem is made for fans who want to view real time UFC data through their command line. This gem will allow you to view upcoming UFC events, the fighters on those events, and stats of each fighter competing.
 
 ## Installation
 
