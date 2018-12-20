@@ -1,3 +1,0 @@
-class Concerns::Fighter
-
-end
