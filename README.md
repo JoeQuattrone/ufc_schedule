@@ -43,4 +43,4 @@ Everyone interacting in the UfcSchedule project’s codebases, issue trackers, c
 
 ## Copyright
 
-We do not own any of this data, all rights belong to WME-IMG.
+All rights belong to WME-IMG.
