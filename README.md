@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-Upon installation ufc_schedule, will give you clear directions from the main-menu
+Upon installation of ufc_schedule, you will be given clear directions on usage from the main-menu
 
 ## Development
 
