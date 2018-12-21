@@ -9,7 +9,7 @@ extend Concerns::SharedCLIMethods
 
   def greeting
     #greets the user and makes a call to the UFC API to request schedule data
-    puts "Hello fight fan, welcome to your UFC gem! To view a list of upcoming UFC events enter '1'. To exit this gem at any time, enter 'exit'."
+    puts "Hello fight fan, welcome to your UFC gem! To view a list of upcoming UFC events enter '1'. To exit this gem at any time, enter 'exit'. To go back to the previous menu, enter 'back'."
     puts ""
     Concerns::API.get_categories
   end
@@ -18,15 +18,15 @@ extend Concerns::SharedCLIMethods
     #Takes user input and returns schedule if input == "1"
     input = nil
 
-    while input != "exit"
-      input = gets.strip
-      if input == "1"
-        list_schedule
-        #breaks the loop so person only has to type 'exit' once to leave the program
-        break
-      elsif input != "exit" && input != "1"
-        invalid_command_response
-      end
+    input = gets.strip
+    if input == "1"
+      list_schedule
+    elsif input == "exit"
+      goodbye
+      exit
+    else
+      invalid_command_response
+      choose_to_view_schedule
     end
   end
 
@@ -42,25 +42,26 @@ extend Concerns::SharedCLIMethods
   def choose_fight_card
     #Scrapes all the fights from all of the events listed on the schedule and creates fight objects related to each event. Allows user to choose an event, if valid, it will list fights for that event
     Concerns::API.scrape_fights(Concerns::Events.all)
-
-    input = nil
-
-    while input != "exit"
     input = gets.strip
-      if input.to_i > 0 && input.to_i <= Concerns::Events.all.size
+
+      if input.to_i.between?(1, Concerns::Events.all.size)
         list_fights(input.to_i)
-     else
+      elsif input == "back"
+        list_schedule
+      elsif input == "exit"
+        exit
+      else
         invalid_command_response
+        choose_fight_card
       end
-    end
   end
 
   def list_fights(input)
     #finds an event and lists the fights on that event and calls the choose_fight function
     find_event = Concerns::Events.all[input - 1]
 
-      find_event.event_fights.each_with_index do |fight, index|
-        puts "#{index +1 }. #{fight.red_name} vs. #{fight.blue_name} - #{fight.red_weight}"
+    find_event.event_fights.each_with_index do |fight, index|
+      puts "#{index + 1}. #{fight.red_name} vs. #{fight.blue_name} - #{fight.red_weight}"
     end
     choose_fight(find_event)
   end
@@ -68,25 +69,27 @@ extend Concerns::SharedCLIMethods
   def choose_fight(event)
     #Allows user to choose a specific fight and pulls stats on fighters in that fight
     puts ""
-    puts "To see stats of the fighters, enter the number of their corresponding fight"
+    puts "To see stats of the fighters, enter the number of their corresponding fight, or enter 'back' to go back to the schedule"
 
-    input = nil
-    while input != "exit"
-      input = gets.strip
+    input = gets.strip
+    #14.between?(10,20) # true
 
-      if input.to_i <= event.event_fights.count
-        specific_fight = event.event_fights[input.to_i - 1]
-        puts "Name:   #{specific_fight.red_name}  #{specific_fight.blue_name}"
-        puts "Record: #{specific_fight.red_record}  #{specific_fight.blue_record}"
-        puts "Height: #{specific_fight.red_height}    #{specific_fight.blue_height}"
-        puts "Weight: #{specific_fight.red_weight}  #{specific_fight.blue_weight}"
-        break
+    if input.to_i.between?(1, event.event_fights.count)
+      specific_fight = event.event_fights[input.to_i - 1]
+      puts "Name:   #{specific_fight.red_name}  #{specific_fight.blue_name}"
+      puts "Record: #{specific_fight.red_record}  #{specific_fight.blue_record}"
+      puts "Height: #{specific_fight.red_height}    #{specific_fight.blue_height}"
+      puts "Weight: #{specific_fight.red_weight}  #{specific_fight.blue_weight}"
 
-      elsif input.to_i <= 0 || input.to_i > event.event_fights.count 
-        invalid_command_response
-        choose_fight(event)
-        break
-      end
+      choose_fight(event)
+    elsif input == "exit"
+      goodbye
+      exit
+    elsif input == "back"
+      list_schedule
+    else
+      invalid_command_response
+      choose_fight(event)
     end
   end
 

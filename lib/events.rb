@@ -50,4 +50,12 @@ class Concerns::Events
     Time.parse(event.date).strftime("%B %d, %Y")
   end
 
+  def self.clear
+    self.all.clear
+  end
+
+  def clear_fights
+    @event_fights.clear
+  end
+
 end

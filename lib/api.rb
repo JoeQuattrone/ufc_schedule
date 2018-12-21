@@ -11,7 +11,9 @@ class Concerns::API
   def self.scrape_fights(array_of_events)
     #for each event id this will scrape event data iterate through the fights and create EventFight objects for each fight on the event and associate those fights to an event
     #binding.pry
+    self.reset_data #resets fight.all for back funtionality
     array_of_events.each do |event|
+      event.clear_fights #resets events.event_fights array
 
       doc = Nokogiri::HTML(open("http://ufc-data-api.ufc.com/api/v1/us/events/#{event.id}"))
 
@@ -38,4 +40,7 @@ class Concerns::API
     end
   end
 
+  def self.reset_data
+    Concerns::EventFight.clear
+  end
 end
