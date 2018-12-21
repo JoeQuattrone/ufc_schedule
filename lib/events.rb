@@ -34,7 +34,6 @@ class Concerns::Events
   end
 
   def self.list_events
-    #1. UFC 232: Jones vs Gustafsson 2 - December 29, 2018. Las Vegas, Nevada.
     self.all.each_with_index do |event, index|
       puts "#{index + 1}. #{event.title}: #{event.tag_line} - #{self.fix_date(event)}. #{self.determine_location(event)}."
     end
