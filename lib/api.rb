@@ -10,8 +10,7 @@ class Concerns::API
 
   def self.scrape_fights(array_of_events)
     #for each event id this will scrape event data iterate through the fights and create EventFight objects for each fight on the event and associate those fights to an event
-    #binding.pry
-    self.reset_data #resets even_fight.all for back funtionality
+    self.reset_data
     array_of_events.each do |event|
       event.clear_fights #resets events.event_fights array
 
@@ -40,7 +39,7 @@ class Concerns::API
     end
   end
 
-  def self.reset_data
+  def self.reset_data #resets event_fight.all for back funtionality
     Concerns::EventFight.clear
   end
 end

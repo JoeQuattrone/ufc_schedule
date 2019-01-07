@@ -20,6 +20,7 @@ extend Concerns::SharedCLIMethods
 
     input = gets.strip
     if input == "1"
+      system "clear"
       list_schedule
     elsif input == "exit"
       goodbye
@@ -45,10 +46,12 @@ extend Concerns::SharedCLIMethods
     input = gets.strip
 
       if input.to_i.between?(1, Concerns::Events.all.size)
+        system "clear"
         list_fights(input.to_i)
       elsif input == "back"
         list_schedule
       elsif input == "exit"
+        goodbye
         exit
       else
         invalid_command_response
