@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["joequattrone5@gmail.com"]
 
   spec.summary       = %q{This is a gem that will allow you to view the Ultimate Fighting Championship (UFC) schedule as well as statistics related to the scheduled fights}
-  spec.homepage      = "https://github.com/JoeQuattroneufc_schedule"
+  spec.homepage      = "https://github.com/JoeQuattrone/ufc_schedule"
   spec.license       = "MIT"
 
   spec.files         = Dir.chdir(File.expand_path('..', __FILE__)) do
