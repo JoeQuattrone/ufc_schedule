@@ -43,6 +43,13 @@ extend Concerns::SharedCLIMethods
   def choose_fight_card
     #Scrapes all the fights from all of the events listed on the schedule and creates fight objects related to each event. Allows user to choose an event, if valid, it will list fights for that event
     Concerns::API.scrape_fights(Concerns::Events.all)
+
+    #Verify fights have been created
+    if Concerns::EventFight.all.size == 0
+      goodbye
+      exit
+    end
+
     input = gets.strip
 
       if input.to_i.between?(1, Concerns::Events.all.size)

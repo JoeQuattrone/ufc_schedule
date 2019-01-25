@@ -1,8 +1,9 @@
+require 'pry'
+
 class Concerns::API
   def self.get_categories
     cats = RestClient.get('http://ufc-data-api.ufc.com/api/v1/us/events')
     @data = JSON.parse(cats)
-
     @data.each do |events|
       Concerns::Events.new_from_api(events)
     end
@@ -13,7 +14,7 @@ class Concerns::API
     self.reset_data
     array_of_events.each do |event|
       event.clear_fights #resets events.event_fights array
-
+      begin #creates error if api is down
       doc = Nokogiri::HTML(open("http://ufc-data-api.ufc.com/api/v1/us/events/#{event.id}"))
 
       doc.css('.flipcard-front-pre').each do |card|
@@ -36,10 +37,17 @@ class Concerns::API
         #adds the fight to the Events.event_fights array
         event.event_fights << new_fight
       end
+    rescue OpenURI::HTTPError => e_message
+       puts e_message
+       puts "UFC API is down"
+       return
+     end
     end
   end
+
 
   def self.reset_data #resets event_fight.all for back funtionality
     Concerns::EventFight.clear
   end
+
 end
